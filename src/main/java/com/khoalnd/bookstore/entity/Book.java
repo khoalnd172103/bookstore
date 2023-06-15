@@ -1,7 +1,6 @@
 package com.khoalnd.bookstore.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.*;
 
 import java.util.Date;
