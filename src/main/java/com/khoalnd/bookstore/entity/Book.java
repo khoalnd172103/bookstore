@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "book")
-@Schema(description = "Book Model Information")
+@Schema(name = "Book", description = "Book Model Information")
 public class Book {
 
     @Id

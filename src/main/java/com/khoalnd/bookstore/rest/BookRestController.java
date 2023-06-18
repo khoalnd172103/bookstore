@@ -67,8 +67,7 @@ public class BookRestController {
     @PostMapping("/books")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully add the book",
-                    content = { @Content(mediaType = "application/json"
-                            )}),
+                    content = { @Content(mediaType = "application/json")}),
             @ApiResponse(responseCode = "405", description = "Invalid input",
                     content = { @Content (schema = @Schema(implementation = BookErrorResponse.class))})
     })
@@ -87,17 +86,16 @@ public class BookRestController {
     @PutMapping("/books")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully update new book",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Book.class))}),
+                    content = { @Content(mediaType = "application/json")}),
             @ApiResponse(responseCode = "404", description = "Book not found",
                     content = { @Content (schema = @Schema(implementation = BookErrorResponse.class))})
     })
-    public ResponseEntity updateBook(@RequestBody Book newBook) {
-        Optional<Book> result = bookRepository.findById(newBook.getId());
+    public ResponseEntity updateBook(@RequestBody Book theBook) {
+        Optional<Book> result = bookRepository.findById(theBook.getId());
 
         if (result.isPresent()) {
-            bookRepository.save(newBook);
-            return ResponseEntity.ok(newBook);
+            bookRepository.save(theBook);
+            return ResponseEntity.ok(theBook);
         } else {
             return new BookExceptionHandler().handleBookNotFound();
         }

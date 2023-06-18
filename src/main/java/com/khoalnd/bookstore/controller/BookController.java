@@ -1,0 +1,71 @@
+package com.khoalnd.bookstore.controller;
+
+import com.khoalnd.bookstore.dao.BookRepository;
+import com.khoalnd.bookstore.entity.Book;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+@Controller
+@RequestMapping("/books")
+public class BookController {
+
+    private BookRepository bookRepository;
+
+    public BookController(BookRepository theBookRepository) {
+        bookRepository = theBookRepository;
+    }
+    @GetMapping("/list")
+    public String listBook(Model model) {
+        List<Book> list = bookRepository.findAll();
+
+        model.addAttribute("books", list);
+
+        return "books/book-list";
+    }
+
+    @GetMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("bookId") int bookId, Model model) {
+        Optional<Book> book = bookRepository.findById(bookId);
+
+        model.addAttribute("book", book);
+
+        return "books/book-form";
+    }
+
+    @GetMapping("/showFormForAdd")
+    public String showFormForAdd(Model model) {
+        Book book = new Book();
+
+        model.addAttribute("book", book);
+
+        return "books/book-form";
+    }
+
+    @PostMapping("/save")
+    public String saveBook(@ModelAttribute("book") Book book) {
+        bookRepository.save(book);
+
+        return "redirect:/books/list";
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("bookId") int bookId) {
+        bookRepository.deleteById(bookId);
+
+        return "redirect:/books/list";
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
+}
