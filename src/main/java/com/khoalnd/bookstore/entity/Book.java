@@ -22,29 +22,30 @@ public class Book {
     @Column(name = "isbn13")
     private String isbn;
     @Schema(description = "Book's languageId")
-    @Column(name = "language_id")
-    private int languageId;
+    @ManyToOne
+    @JoinColumn(name = "language_id")
+    private BookLanguage language;
     @Schema(description = "Book's number of pages")
     @Column(name = "num_pages")
     private int numPage;
     @Schema(description = "Book's publication date")
     @Column(name = "publication_date")
     private Date publicationDate;
-    @Schema(description = "Book's publisher Id")
-    @Column(name = "publisher_id")
-    private int publisherId;
+    @Column(name = "author")
+    @Schema(description = "Book's author")
+    private String author;
 
     public Book() {
     }
 
-    public Book(int id, String title, String isbn, int languageId, int numPage, Date publicationDate, int publisherId) {
+    public Book(int id, String title, String isbn, BookLanguage language, int numPage, Date publicationDate, String author) {
         this.id = id;
         this.title = title;
         this.isbn = isbn;
-        this.languageId = languageId;
+        this.language = language;
         this.numPage = numPage;
         this.publicationDate = publicationDate;
-        this.publisherId = publisherId;
+        this.author = author;
     }
 
     public int getId() {
@@ -71,12 +72,12 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public int getLanguageId() {
-        return languageId;
+    public BookLanguage getLanguage() {
+        return language;
     }
 
-    public void setLanguageId(int languageId) {
-        this.languageId = languageId;
+    public void setLanguage(BookLanguage language) {
+        this.language = language;
     }
 
     public int getNumPage() {
@@ -95,12 +96,12 @@ public class Book {
         this.publicationDate = publicationDate;
     }
 
-    public int getPublisherId() {
-        return publisherId;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setPublisherId(int publisherId) {
-        this.publisherId = publisherId;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @Override
@@ -109,10 +110,10 @@ public class Book {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", isbn='" + isbn + '\'' +
-                ", languageId='" + languageId + '\'' +
+                ", language=" + language +
                 ", numPage=" + numPage +
                 ", publicationDate=" + publicationDate +
-                ", publisherId=" + publisherId +
+                ", author='" + author + '\'' +
                 '}';
     }
 }

@@ -37,8 +37,9 @@
     </p>
 
     <p>Language:
-      <input type="text" th:field="*{languageId}" placeholder="Language"
-             class="form-control mb-4 w-25">
+      <select class="form-control mb-4 w-25" name="selectedLanguage">
+        <option th:each="language : ${languages}" th:value="${language.id}" th:text="${language.name}"></option>
+      </select>
     </p>
 
     <p>Page number:
@@ -51,8 +52,8 @@
              class="form-control mb-4 w-25">
     </p>
 
-    <p>Publisher:
-      <input type="text" th:field="*{publisherId}" placeholder="Publisher"
+    <p>Author:
+      <input type="text" th:field="*{author}" placeholder="Author"
              class="form-control mb-4 w-25">
     </p>
 

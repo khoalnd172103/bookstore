@@ -1,7 +1,9 @@
 package com.khoalnd.bookstore.controller;
 
+import com.khoalnd.bookstore.dao.BookLanguageRepository;
 import com.khoalnd.bookstore.dao.BookRepository;
 import com.khoalnd.bookstore.entity.Book;
+import com.khoalnd.bookstore.entity.BookLanguage;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +21,11 @@ public class BookController {
 
     private BookRepository bookRepository;
 
-    public BookController(BookRepository theBookRepository) {
+    private BookLanguageRepository bookLanguageRepository;
+
+    public BookController(BookRepository theBookRepository, BookLanguageRepository theBookLanguageRepository) {
         bookRepository = theBookRepository;
+        bookLanguageRepository = theBookLanguageRepository;
     }
     @GetMapping("/list")
     public String listBook(Model model) {
@@ -34,8 +39,10 @@ public class BookController {
     @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("bookId") int bookId, Model model) {
         Optional<Book> book = bookRepository.findById(bookId);
+        List<BookLanguage> languages = bookLanguageRepository.findAll();
 
         model.addAttribute("book", book);
+        model.addAttribute("languages", languages);
 
         return "books/book-form";
     }
@@ -43,14 +50,18 @@ public class BookController {
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model model) {
         Book book = new Book();
+        List<BookLanguage> languages = bookLanguageRepository.findAll();
 
         model.addAttribute("book", book);
+        model.addAttribute("languages", languages);
 
         return "books/book-form";
     }
 
     @PostMapping("/save")
-    public String saveBook(@ModelAttribute("book") Book book) {
+    public String saveBook(@ModelAttribute("book") Book book, @RequestParam("selectedLanguage") BookLanguage selectedLanguage) {
+        book.setLanguage(selectedLanguage);
+
         bookRepository.save(book);
 
         return "redirect:/books/list";
