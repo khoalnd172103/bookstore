@@ -1,0 +1,26 @@
+{
+"id": 2,
+"title":"Đừng Chạy Theo Số Đông", 
+"isbn":"8788427845641", 
+"language": {
+            "id": 2,
+            "code": "vn",
+            "name": "Vietnamese"
+        }, 
+"numPage": 416, 
+"publicationDate": "2020-06-24", 
+"author": "Kiên Trần"
+}
+
+{
+"title":"Làm Người Thú Vị", 
+"isbn":"5265552974765", 
+"language": {
+            "id": 2,
+            "code": "vn",
+            "name": "Vietnamese"
+        }, 
+"numPage": 304, 
+"publicationDate": "2020-06-24", 
+"author": "TS. Edward De Bono"
+}
