@@ -31,11 +31,11 @@
 <div  align="center">
 
 * Book Store UI
-<img  src="https://github.com/khoalnd172103/bookstore/blob/main/preview/book-list.png" width="45%"></img>
-<img  src="https://github.com/khoalnd172103/bookstore/blob/main/preview/book-form.png"  width="45%"></img>
+<img  src="https://github.com/khoalnd172103/bookstore/blob/main/preview/book-list.png"></img>
+<img  src="https://github.com/khoalnd172103/bookstore/blob/main/preview/book-form.png"></img>
 
 * Swagger UI: API Documentation
-<img  src="https://github.com/khoalnd172103/bookstore/blob/main/preview/swagger-ui.png"  width="45%"></img> 
+<img  src="https://github.com/khoalnd172103/bookstore/blob/main/preview/swagger-ui.png"></img> 
 
 </div>
 
